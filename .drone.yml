@@ -1,0 +1,25 @@
+pipeline:
+  build_image:
+    environment:
+      - DOCKER_USERNAME=ukhomeofficedigital+drone
+    image: quay.io/ukhomeofficedigital/drone-docker
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/openjdk11
+    secrets: [ DOCKER_PASSWORD ]
+    tags:
+      - ${DRONE_COMMIT_SHA}
+    when:
+      event: push
+
+  build_image_tag:
+    environment:
+      - DOCKER_USERNAME=ukhomeofficedigital+drone
+    image: quay.io/ukhomeofficedigital/drone-docker
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/openjdk11
+    secrets: [ DOCKER_PASSWORD ]
+    tags:
+      - ${DRONE_TAG}
+      - latest
+    when:
+      event: tag
