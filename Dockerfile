@@ -7,6 +7,7 @@ RUN echo $(curl -L https://download.java.net/java/GA/jdk11/13/GPL/openjdk-${JAVA
 RUN sha256sum -c checksum.txt
 RUN tar xzf openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 RUN mv jdk-${JAVA_VERSION} /usr/local/java
+RUN chown -R root:root /usr/local/java
 
 # Security patches etc. managed centrally
 # =======================================
