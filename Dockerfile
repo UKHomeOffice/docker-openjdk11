@@ -1,13 +1,15 @@
 FROM quay.io/ukhomeofficedigital/centos-base:latest AS stage
 
-ENV JAVA_VERSION 11.0.1
+ENV JAVA_VERSION "11.0.5+10"
 
-RUN curl -LO https://download.java.net/java/GA/jdk11/13/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
-RUN echo $(curl -L https://download.java.net/java/GA/jdk11/13/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz.sha256) openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz > checksum.txt
-RUN sha256sum -c checksum.txt
-RUN tar xzf openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
-RUN mv jdk-${JAVA_VERSION} /usr/local/java
-RUN chown -R root:root /usr/local/java
+RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
+    export JAVA_VERSION_FILE=${JAVA_VERSION/+/_} && \
+    curl -LO https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-${JAVA_VERSION_PATH}/OpenJDK11U-jdk_x64_linux_hotspot_${JAVA_VERSION_FILE}.tar.gz && \
+    curl -Lo sha256.txt https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-${JAVA_VERSION_PATH}/OpenJDK11U-jdk_x64_linux_hotspot_${JAVA_VERSION_FILE}.tar.gz.sha256.txt && \
+    sha256sum -c sha256.txt && \
+    tar xzf OpenJDK11U-jdk_x64_linux_hotspot_${JAVA_VERSION_FILE}.tar.gz && \
+    mv jdk-${JAVA_VERSION} /usr/local/java && \
+    chown -R root:root /usr/local/java
 
 # Security patches etc. managed centrally
 # =======================================
