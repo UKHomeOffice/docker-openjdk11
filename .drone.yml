@@ -23,3 +23,12 @@ pipeline:
       - latest
     when:
       event: tag
+
+  scan:
+    image: quay.io/ukhomeofficedigital/anchore-submission:latest
+    environment:
+      - WHITELIST=CVE-2019-5827
+    image_name: quay.io/ukhomeofficedigital/openjdk11:${DRONE_COMMIT_SHA}
+    local_image: true
+    when:
+      event: push
