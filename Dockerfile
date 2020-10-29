@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/centos-base:v8.0.0-rc1 AS stage
+FROM quay.io/ukhomeofficedigital/centos-base:v8.0.0-rc2 AS stage
 
 ENV JAVA_VERSION "11.0.5+10"
 
@@ -13,7 +13,7 @@ RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
 
 # Security patches etc. managed centrally
 # =======================================
-FROM quay.io/ukhomeofficedigital/centos-base:v8.0.0-rc1
+FROM quay.io/ukhomeofficedigital/centos-base:v8.0.0-rc2
 
 # Install Open Java 11
 # ===================
