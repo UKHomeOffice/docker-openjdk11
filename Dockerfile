@@ -1,6 +1,6 @@
-FROM quay.io/ukhomeofficedigital/centos-base:v0.6.0 AS stage
+FROM quay.io/ukhomeofficedigital/centos-base:v0.7.0 AS stage
 
-ENV JAVA_VERSION "11.0.5+10"
+ENV JAVA_VERSION "11.0.11+9"
 
 RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
     export JAVA_VERSION_FILE=${JAVA_VERSION/+/_} && \
@@ -13,17 +13,14 @@ RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
 
 # Security patches etc. managed centrally
 # =======================================
-FROM quay.io/ukhomeofficedigital/centos-base:v0.6.0
-
-# Install Open Java 11
-# ===================
+FROM quay.io/ukhomeofficedigital/centos-base:v0.7.0
 
 # Set correct environment variables.
-ENV	HOME /root
-ENV	LANG en_US.UTF-8
-ENV	LC_ALL en_US.UTF-8
+ENV HOME /root \
+    LANG en_US.UTF-8 \
+    LC_ALL en_US.UTF-8 \
 
 COPY --from=stage /usr/local/java /usr/local/java
 
-ENV JAVA_HOME /usr/local/java
-ENV PATH $PATH:$JAVA_HOME/bin
+ENV JAVA_HOME /usr/local/java \
+    PATH $PATH:$JAVA_HOME/bin
