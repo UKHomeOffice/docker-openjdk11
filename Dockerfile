@@ -16,11 +16,9 @@ RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
 FROM quay.io/ukhomeofficedigital/centos-base:v0.7.0
 
 # Set correct environment variables.
-ENV HOME /root \
-    LANG en_US.UTF-8 \
-    LC_ALL en_US.UTF-8 \
+ENV HOME /root
 
 COPY --from=stage /usr/local/java /usr/local/java
 
-ENV JAVA_HOME /usr/local/java \
-    PATH $PATH:$JAVA_HOME/bin
+ENV JAVA_HOME /usr/local/java
+ENV PATH $PATH:$JAVA_HOME/bin

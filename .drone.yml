@@ -25,7 +25,7 @@ steps:
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission
   settings:
     image_name: openjdk11:${DRONE_COMMIT_SHA}
-    whitelist: CVE-2019-5827, CVE-2021-25215
+    whitelist: CVE-2019-5827, CVE-2021-25215, CVE-2021-25217, CVE-2021-27219
   when:
     event:
     - push
