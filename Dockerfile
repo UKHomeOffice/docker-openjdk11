@@ -1,6 +1,6 @@
 FROM quay.io/ukhomeofficedigital/centos-base:v0.7.0 AS stage
 
-ENV JAVA_VERSION "11.0.11+9"
+ENV JAVA_VERSION "11.0.13+10"
 
 RUN export JAVA_VERSION_PATH=${JAVA_VERSION/+/%2B} && \
     export JAVA_VERSION_FILE=${JAVA_VERSION/+/_} && \
